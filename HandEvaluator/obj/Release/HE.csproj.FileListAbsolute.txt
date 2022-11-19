@@ -1,0 +1,7 @@
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\bin\Release\HE.xml
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\bin\Release\HE.dll
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\bin\Release\HE.pdb
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\Release\HE.csproj.AssemblyReference.cache
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\Release\HE.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\Release\HE.dll
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\Release\HE.pdb

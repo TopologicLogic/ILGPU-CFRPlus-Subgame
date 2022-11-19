@@ -1,0 +1,44 @@
+C:\Documents and Settings\Administrator\Desktop\Poker Stuff\Hand Evaluator\HandEvaluator\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\Poker Stuff\Hand Evaluator\HandEvaluator\bin\Debug\HE.dll
+C:\Documents and Settings\Administrator\Desktop\Poker Stuff\Hand Evaluator\HandEvaluator\bin\Debug\HE.pdb
+C:\Documents and Settings\Administrator\Desktop\Poker Stuff\Hand Evaluator\HandEvaluator\obj\Debug\HE.dll
+C:\Documents and Settings\Administrator\Desktop\Poker Stuff\Hand Evaluator\HandEvaluator\obj\Debug\HE.pdb
+C:\Documents and Settings\Administrator\Desktop\Poker Stuff\Hand Evaluator\HandEvaluator\bin\Debug\HE.xml
+C:\Documents and Settings\Owner\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.dll
+C:\Documents and Settings\Owner\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.pdb
+C:\Documents and Settings\Owner\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Owner\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.dll
+C:\Documents and Settings\Owner\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.pdb
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.dll
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.pdb
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.dll
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.pdb
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.dll
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.pdb
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\HE.dll
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\HE.pdb
+C:\Documents and Settings\phobe\My Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.xml
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.dll
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.pdb
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\HE.dll
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\HE.pdb
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.dll
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.pdb
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.dll
+C:\Users\Phobe\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.pdb
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.xml
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.dll
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Release\HE.pdb
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\HE.dll
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Release\HE.pdb
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.dll
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.pdb
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.dll
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\obj\Debug\HE.pdb
+C:\Users\Dev\Documents\Visual Studio 2005\Projects\Hand Evaluator\HandEvaluator\bin\Debug\HE.xml

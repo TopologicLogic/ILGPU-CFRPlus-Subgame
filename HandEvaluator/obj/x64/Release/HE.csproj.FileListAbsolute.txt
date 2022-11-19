@@ -1,0 +1,14 @@
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\bin\x64\Release\HE.dll
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\bin\x64\Release\HE.pdb
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\bin\x64\Release\HE.xml
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\x64\Release\HE.csproj.AssemblyReference.cache
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\x64\Release\HE.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\x64\Release\HE.dll
+C:\Users\PC\source\repos\CFRM2\HandEvaluator\obj\x64\Release\HE.pdb
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\bin\x64\Release\HE.dll
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\bin\x64\Release\HE.pdb
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\bin\x64\Release\HE.xml
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\obj\x64\Release\HE.csproj.AssemblyReference.cache
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\obj\x64\Release\HE.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\obj\x64\Release\HE.dll
+C:\Users\PC\source\repos\ILGPU_CFRPlus_Subgame\HandEvaluator\obj\x64\Release\HE.pdb
