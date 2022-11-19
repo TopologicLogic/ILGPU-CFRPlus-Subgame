@@ -3,8 +3,6 @@ using System;
 using ILGPU;
 using ILGPU.Runtime;
 using System.Collections.Generic;
-using System.Media;
-using System.Reflection.Metadata;
 
 namespace ILGPU_CFRPlus_Subgame
 {
