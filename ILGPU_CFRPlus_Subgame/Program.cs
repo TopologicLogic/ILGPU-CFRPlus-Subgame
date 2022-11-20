@@ -4,6 +4,7 @@ using ILGPU;
 using ILGPU.Runtime;
 using System.Collections.Generic;
 
+
 namespace ILGPU_CFRPlus_Subgame
 {
     internal class Program
@@ -35,7 +36,7 @@ namespace ILGPU_CFRPlus_Subgame
             double[] op = new double[size];
             for (int i = 0; i < op.Length; i++)
                 op[i] = 1.0;
-            double[] ev = game.BestResponse(turn, ref td, op);
+            double[] ev = game.BestResponse(turn, td, op);
             double sum = 0;
             for (int i = 0; i < ev.Length; i++)
                 sum += ev[i];
@@ -231,7 +232,7 @@ namespace ILGPU_CFRPlus_Subgame
 
 
                 // Periodically show the resulting strategy.
-                if (i % 50 == 0)
+                if (i % 10 == 0)
                 {
                     Console.WriteLine(i + ": " + (DateTime.Now.Subtract(dt).TotalSeconds / i));
                     //Console.WriteLine(getExploitability(op.Length, ref td, game).ToString());
@@ -262,8 +263,8 @@ namespace ILGPU_CFRPlus_Subgame
 
                 }
 
-                game.Train(ref accelerator, 0, ref td, mop);
-                game.Train(ref accelerator, 1, ref td, mop);
+                game.Train(accelerator, 0, td, mop);
+                game.Train(accelerator, 1, td, mop);
 
             }
 

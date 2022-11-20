@@ -36,7 +36,7 @@ namespace ILGPU_CFRPlus_Subgame
             ev[z] /= (op.Length - 1);
         }
 
-        public override MemoryBuffer1D<double, Stride1D.Dense> Train(ref Accelerator accelerator, int player, ref TrainData td, MemoryBuffer1D<double, Stride1D.Dense> op)
+        public override MemoryBuffer1D<double, Stride1D.Dense> Train(Accelerator accelerator, int player, TrainData td, MemoryBuffer1D<double, Stride1D.Dense> op)
         {
 
             //Kernel_SumMult(Index1D z, ArrayView<double> ev, ArrayView<double> op, ArrayView<double> utility, ArrayView<double> rank)
@@ -50,7 +50,7 @@ namespace ILGPU_CFRPlus_Subgame
             return _ev;
         }
 
-        public override double[] BestResponse(int player, ref TrainData td, double[] op)
+        public override double[] BestResponse(int player, TrainData td, double[] op)
         {
             double[] ev = new double[op.Length];
 

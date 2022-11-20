@@ -22,7 +22,7 @@ namespace ILGPU_CFRPlus_Subgame
             ev[z] = op[z] * utility[0];
         }
 
-        public override MemoryBuffer1D<double, Stride1D.Dense> Train(ref Accelerator accelerator, int player, ref TrainData td, MemoryBuffer1D<double, Stride1D.Dense> op)
+        public override MemoryBuffer1D<double, Stride1D.Dense> Train(Accelerator accelerator, int player, TrainData td, MemoryBuffer1D<double, Stride1D.Dense> op)
         {
             _ev.MemSetToZero();
 
@@ -57,7 +57,7 @@ namespace ILGPU_CFRPlus_Subgame
             //return null;
         }
 
-        public override double[] BestResponse(int player, ref TrainData td, double[] op)
+        public override double[] BestResponse(int player, TrainData td, double[] op)
         {
             double[] ev = new double[op.Length];
 

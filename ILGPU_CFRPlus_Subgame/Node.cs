@@ -24,9 +24,9 @@ namespace ILGPU_CFRPlus_Subgame
     {
         public NodeType type { get; }
 
-        public abstract MemoryBuffer1D<double, Stride1D.Dense> Train(ref Accelerator accelerator, int player, ref TrainData td, MemoryBuffer1D<double, Stride1D.Dense> op);
+        public abstract MemoryBuffer1D<double, Stride1D.Dense> Train(Accelerator accelerator, int player, TrainData td, MemoryBuffer1D<double, Stride1D.Dense> op);
 
-        public abstract double[] BestResponse(int player, ref TrainData td, double[] op);
+        public abstract double[] BestResponse(int player, TrainData td, double[] op);
 
         public Node(NodeType node_type)
         {
