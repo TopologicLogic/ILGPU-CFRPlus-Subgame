@@ -171,14 +171,14 @@ namespace ILGPU_CFRPlus_Subgame
 
                 //for (int a = 0; a < _children.Length; a++)
                 //{
-                //    u[a] = _children[a].Train(player, ref td, op);
+                //    u[a] = _children[a].Train(player, td, op);
                 //    for (int i = 0; i < op.Length; i++)
                 //        ev[i] += s[i][a] * u[a][i];
                 //}
 
                 //for (int a = 0; a < _children.Length; a++)
                 //{
-                //    double[] t = _children[a].Train(ref accelerator, player, ref td, op);
+                //    double[] t = _children[a].Train(accelerator, player, td, op);
                 //    for (int b = 0; b < t.Length; b++)    
                 //        u[a, b] = t[b];
                 //}
@@ -189,7 +189,7 @@ namespace ILGPU_CFRPlus_Subgame
 
                 for (int a = 0; a < _children.Length; a++)
                 {
-                    //t = _children[a].Train(ref accelerator, player, ref td, op);
+                    //t = _children[a].Train(accelerator, player, td, op);
 
                     // Transpose evs => u[a,evs]
                     _idx.CopyFromCPU(new int[] { a });
@@ -258,7 +258,7 @@ namespace ILGPU_CFRPlus_Subgame
                 ev = _children[0].BestResponse(player, td, op);
 
                 for (int i = 1; i < _children.Length; i++)
-                    max(ref ev, _children[i].BestResponse(player, td, op));
+                    max(ev, _children[i].BestResponse(player, td, op));
 
             }
             else
@@ -273,9 +273,9 @@ namespace ILGPU_CFRPlus_Subgame
                 //        newop[i] = s[a] * op[i];
                 //    }
 
-                //    double[] br = _children[a].BestResponse(player, ref td, newop);
+                //    double[] br = _children[a].BestResponse(player, td, newop);
 
-                //    if (a == 0) ev = br; else add(ref ev, br);
+                //    if (a == 0) ev = br; else add(ev, br);
                 //}
 
                 double[,] s = getNormalizedStrategies();
@@ -287,26 +287,26 @@ namespace ILGPU_CFRPlus_Subgame
 
                     double[] br = _children[a].BestResponse(player, td, newop);
 
-                    if (a == 0) ev = br; else add(ref ev, br);
+                    if (a == 0) ev = br; else add(ev, br);
                 }
             }
 
             return ev;
         }
 
-        private static void max(ref double[] a, double[] b)
+        private static void max(double[] a, double[] b)
         {
             for (int i = 0; i < a.Length; i++)
                 if (a[i] < b[i]) a[i] = b[i];
         }
 
-        private static void add(ref double[] a, double[] b)
+        private static void add(double[] a, double[] b)
         {
             for (int i = 0; i < a.Length; i++)
                 a[i] += b[i];
         }
 
-        //public void copyOrAdd(bool copy, ref double[] a, double [] b)
+        //public void copyOrAdd(bool copy, double[] a, double [] b)
         //{
         //    if (copy)
         //    {
@@ -403,7 +403,7 @@ namespace ILGPU_CFRPlus_Subgame
 
 
 
-        public Decision(string hh, ref Accelerator accelerator, int size, int player, params Node[] children) : base(NodeType.Decision)
+        public Decision(string hh, Accelerator accelerator, int size, int player, params Node[] children) : base(NodeType.Decision)
         {
             _player = player;
             _size = size;

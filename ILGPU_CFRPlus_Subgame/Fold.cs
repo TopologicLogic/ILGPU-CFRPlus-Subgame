@@ -89,7 +89,7 @@ namespace ILGPU_CFRPlus_Subgame
             return ev;
         }
 
-        public Fold(ref Accelerator accelerator, int size, int player,  double utility) : base(NodeType.Fold)
+        public Fold(Accelerator accelerator, int size, int player,  double utility) : base(NodeType.Fold)
         {
             _player = player;
             _size = size;

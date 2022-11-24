@@ -31,7 +31,7 @@ namespace ILGPU_CFRPlus_Subgame
         //                                                         new double[] { 0.5 },
         //                                                         new double[] { 0.5 }};
 
-        public static double getBestResponseValue(int size, int turn, ref TrainData td, Node game)
+        public static double getBestResponseValue(int size, int turn, TrainData td, Node game)
         {
             double[] op = new double[size];
             for (int i = 0; i < op.Length; i++)
@@ -43,14 +43,14 @@ namespace ILGPU_CFRPlus_Subgame
             return sum / size;
         }
 
-        public static double getExploitability(int size, ref TrainData td, Node game)
+        public static double getExploitability(int size, TrainData td, Node game)
         {
-            double br0 = getBestResponseValue(size, 0, ref td, game);
-            double br1 = getBestResponseValue(size, 1, ref td, game);
+            double br0 = getBestResponseValue(size, 0, td, game);
+            double br1 = getBestResponseValue(size, 1, td, game);
             return (br0 + br1) / 2;
         }
 
-        public static Decision buildTreeHUL(ref Accelerator accelerator, int size, int turn, int betround, double pot, string hand_history)
+        public static Decision buildTreeHUL(Accelerator accelerator, int size, int turn, int betround, double pot, string hand_history)
         {
             bool op_checked = false;
 
@@ -65,18 +65,18 @@ namespace ILGPU_CFRPlus_Subgame
                 case 0:
                     // Check or Bet.
                     if (op_checked)
-                        return new Decision(hand_history, ref accelerator, size, turn, new Showdown(ref accelerator, size, pot / 2), buildTreeHUL(ref accelerator, size, turn ^ 1, betround + 1, pot + bv, hand_history + "b"));
-                    return new Decision(hand_history, ref accelerator, size, turn, buildTreeHUL(ref accelerator, size, turn ^ 1, betround, pot, hand_history + "k"), buildTreeHUL(ref accelerator, size, turn ^ 1, betround + 1, pot + bv, hand_history + "b"));
+                        return new Decision(hand_history, accelerator, size, turn, new Showdown(accelerator, size, pot / 2), buildTreeHUL(accelerator, size, turn ^ 1, betround + 1, pot + bv, hand_history + "b"));
+                    return new Decision(hand_history, accelerator, size, turn, buildTreeHUL(accelerator, size, turn ^ 1, betround, pot, hand_history + "k"), buildTreeHUL(accelerator, size, turn ^ 1, betround + 1, pot + bv, hand_history + "b"));
                 case 3:
                     // Fold or Call
-                    return new Decision(hand_history, ref accelerator, size, turn, new Fold(ref accelerator, size, turn, (pot - bv) / 2), new Showdown(ref accelerator, size, (pot + bv) / 2));
+                    return new Decision(hand_history, accelerator, size, turn, new Fold(accelerator, size, turn, (pot - bv) / 2), new Showdown(accelerator, size, (pot + bv) / 2));
                 default:
                     // Fold, Call, or Raise
-                    return new Decision(hand_history, ref accelerator, size, turn, new Fold(ref accelerator, size, turn, (pot - bv) / 2), new Showdown(ref accelerator, size, (pot + bv) / 2), buildTreeHUL(ref accelerator, size, turn ^ 1, betround + 1, pot + bv * 2, hand_history + "r"));
+                    return new Decision(hand_history, accelerator, size, turn, new Fold(accelerator, size, turn, (pot - bv) / 2), new Showdown(accelerator, size, (pot + bv) / 2), buildTreeHUL(accelerator, size, turn ^ 1, betround + 1, pot + bv * 2, hand_history + "r"));
             }
         }
 
-        public static Decision buildTree(ref Accelerator accelerator, int size, double[] stacks, int turn, int betround, double pot, double last_bet, string hand_history)
+        public static Decision buildTree(Accelerator accelerator, int size, double[] stacks, int turn, int betround, double pot, double last_bet, string hand_history)
         {
             //switch (hand_history)
             //{
@@ -96,9 +96,9 @@ namespace ILGPU_CFRPlus_Subgame
             if (last_bet >= stacks[turn] || stacks[turn ^ 1] <= 0.0) // Op went all-in
             {
                 // Fold or call.
-                actions.Add(new Fold(ref accelerator, size, turn, starting_stacks - stacks[turn]));
-                actions.Add(new Showdown(ref accelerator, size, (pot + stacks[turn]) / 2));
-                return new Decision(hand_history, ref accelerator, size, turn, actions.ToArray());
+                actions.Add(new Fold(accelerator, size, turn, starting_stacks - stacks[turn]));
+                actions.Add(new Showdown(accelerator, size, (pot + stacks[turn]) / 2));
+                return new Decision(hand_history, accelerator, size, turn, actions.ToArray());
             }
 
             switch (betround)
@@ -107,9 +107,9 @@ namespace ILGPU_CFRPlus_Subgame
                     // Check or Bet.
 
                     if (hand_history.Length > 0 && hand_history[hand_history.Length - 1] == 'k') // Op checked
-                        actions.Add(new Showdown(ref accelerator, size, pot / 2)); 
+                        actions.Add(new Showdown(accelerator, size, pot / 2)); 
                     else
-                        actions.Add(buildTree(ref accelerator, size, stacks, turn ^ 1, betround, pot, 0, hand_history + "k"));
+                        actions.Add(buildTree(accelerator, size, stacks, turn ^ 1, betround, pot, 0, hand_history + "k"));
 
                     for (int i = 0; i < abstraction[betround].Length; i++)
                     {
@@ -119,13 +119,13 @@ namespace ILGPU_CFRPlus_Subgame
                         {
                             bv = stacks[turn];
                             double[] newstacks = (double[])stacks.Clone(); newstacks[turn] = 0.0;
-                            actions.Add(buildTree(ref accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "a"));
+                            actions.Add(buildTree(accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "a"));
                             break;
                         }
                         else
                         {
                             double[] newstacks = (double[])stacks.Clone(); newstacks[turn] -= bv;
-                            actions.Add(buildTree(ref accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "b"));
+                            actions.Add(buildTree(accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "b"));
                         }
                         
                     }
@@ -134,15 +134,15 @@ namespace ILGPU_CFRPlus_Subgame
                 case 3:
                     // Fold or Call
 
-                    actions.Add(new Fold(ref accelerator, size, turn, starting_stacks - stacks[turn]));
-                    actions.Add(new Showdown(ref accelerator, size, (pot + last_bet) / 2));
+                    actions.Add(new Fold(accelerator, size, turn, starting_stacks - stacks[turn]));
+                    actions.Add(new Showdown(accelerator, size, (pot + last_bet) / 2));
                     break;
 
                 default:
                     // Fold, Call, or Raise
                     
-                    actions.Add(new Fold(ref accelerator, size, turn, starting_stacks - stacks[turn]));
-                    actions.Add(new Showdown(ref accelerator, size, (pot + last_bet) / 2));
+                    actions.Add(new Fold(accelerator, size, turn, starting_stacks - stacks[turn]));
+                    actions.Add(new Showdown(accelerator, size, (pot + last_bet) / 2));
 
                     for (int i = 0; i < abstraction[betround].Length; i++)
                     {
@@ -155,20 +155,20 @@ namespace ILGPU_CFRPlus_Subgame
                         {
                             bv = stacks[turn];
                             newstacks[turn] = 0.0;
-                            actions.Add(buildTree(ref accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "a"));
+                            actions.Add(buildTree(accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "a"));
                             break;
                         }
                         else
                         {
                             newstacks[turn] -= bv;
-                            actions.Add(buildTree(ref accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "r"));
+                            actions.Add(buildTree(accelerator, size, newstacks, turn ^ 1, betround + 1, pot + bv, bv, hand_history + "r"));
                         }
                     }
                     break;
 
             }
 
-            return new Decision(hand_history, ref accelerator, size, turn, actions.ToArray());
+            return new Decision(hand_history, accelerator, size, turn, actions.ToArray());
 
         }
 
@@ -213,9 +213,9 @@ namespace ILGPU_CFRPlus_Subgame
 
             // Build the game tree.
 
-            //Decision game = buildTreeHUL(ref accelerator, op.Length, 1, 0, 150, "");
+            //Decision game = buildTreeHUL(accelerator, op.Length, 1, 0, 150, "");
 
-            Decision game = buildTree(ref accelerator, op.Length, new double[] { 1000 - 50, 1000 - 50 }, 1, 0, 100, 0, "");
+            Decision game = buildTree(accelerator, op.Length, new double[] { 1000 - 50, 1000 - 50 }, 1, 0, 100, 0, "");
 
 
 
@@ -235,9 +235,9 @@ namespace ILGPU_CFRPlus_Subgame
                 if (i % 10 == 0)
                 {
                     Console.WriteLine(i + ": " + (DateTime.Now.Subtract(dt).TotalSeconds / i));
-                    //Console.WriteLine(getExploitability(op.Length, ref td, game).ToString());
+                    //Console.WriteLine(getExploitability(op.Length, td, game).ToString());
 
-                    string prefix = i + ": " + getExploitability(op.Length, ref td, game).ToString();
+                    string prefix = i + ": " + getExploitability(op.Length, td, game).ToString();
 
                     //Console.WriteLine(prefix);
 
@@ -270,7 +270,7 @@ namespace ILGPU_CFRPlus_Subgame
 
             //// Show the resulting strategy and exploitability.
             //// This doesn't use ILGPU so it's slow.
-            //string prefix = getExploitability(op.Length, ref td, game).ToString();
+            //string prefix = getExploitability(op.Length, td, game).ToString();
 
             ////Console.WriteLine(prefix);
 

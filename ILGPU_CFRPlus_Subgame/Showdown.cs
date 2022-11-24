@@ -80,7 +80,7 @@ namespace ILGPU_CFRPlus_Subgame
             return ev;
         }
 
-        public Showdown(ref Accelerator accelerator, int size,  double utility) : base(NodeType.Showdown)
+        public Showdown(Accelerator accelerator, int size,  double utility) : base(NodeType.Showdown)
         {
             //_utility = utility;
             //_player = player;
