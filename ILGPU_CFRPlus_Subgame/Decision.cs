@@ -283,16 +283,11 @@ namespace ILGPU_CFRPlus_Subgame
 
                 for (int a = 0; a < _children.Length; a++)
                 {
-                    Parallel.For(0, op.Length, i =>
-                    {
-                        newop[i] = s[i, a] * op[i];
-                    });
-                    //for (int i = 0; i < op.Length; i++)
-                    //    newop[i] = s[i, a] * op[i];
+                    Parallel.For(0, op.Length, i => { newop[i] = s[i, a] * op[i]; });
 
                     double[] br = _children[a].BestResponse(player, td, newop);
 
-                    if (a == 0) ev = br; else Parallel.For(0, ev.Length, i => { ev[i] += br[i]; }); //add(ev, br);
+                    Parallel.For(0, ev.Length, i => { ev[i] += br[i]; }); 
                 }
             }
 
