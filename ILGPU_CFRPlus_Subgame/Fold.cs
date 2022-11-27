@@ -1,6 +1,7 @@
 ﻿using ILGPU.Runtime;
 using ILGPU;
 using System;
+using System.Threading.Tasks;
 
 namespace ILGPU_CFRPlus_Subgame
 {
@@ -76,13 +77,21 @@ namespace ILGPU_CFRPlus_Subgame
 
             if (_player == player)
             {
-                for (int i = 0; i < op.Length; i++)
+                Parallel.For(0, op.Length, i =>
+                {
                     ev[i] = op[i] * -utility;
+                });
+                //for (int i = 0; i < op.Length; i++)
+                //ev[i] = op[i] * -utility;
             }
             else
             {
-                for (int i = 0; i < op.Length; i++)
+                Parallel.For(0, op.Length, i =>
+                {
                     ev[i] = op[i] * utility;
+                });
+                //for (int i = 0; i < op.Length; i++)
+                //    ev[i] = op[i] * utility;
             }
 
 

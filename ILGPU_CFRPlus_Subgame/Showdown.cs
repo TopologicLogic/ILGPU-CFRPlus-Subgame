@@ -2,6 +2,8 @@
 using ILGPU.Runtime;
 using ILGPU;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ILGPU_CFRPlus_Subgame
 {
@@ -57,8 +59,11 @@ namespace ILGPU_CFRPlus_Subgame
             uint[] rank = td.rank.GetAsArray1D();
             double utility = _utility.GetAsArray1D()[0];
 
-            for (int i = 0; i < op.Length; i++)
+            Parallel.For(0, op.Length, i =>
             {
+
+                //    for (int i = 0; i < op.Length; i++)
+                //{
                 for (int j = 0; j < op.Length; j++)
                 {
                     if (j != i)
@@ -75,7 +80,7 @@ namespace ILGPU_CFRPlus_Subgame
                 }
                 ev[i] /= (op.Length - 1);
 
-            }
+            });
 
             return ev;
         }
