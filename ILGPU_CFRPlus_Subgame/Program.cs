@@ -31,23 +31,11 @@ namespace ILGPU_CFRPlus_Subgame
         //                                                         new double[] { 0.5 },
         //                                                         new double[] { 0.5 }};
 
-        public static double getBestResponseValue(int size, int turn, TrainData td, Node game)
-        {
-            double[] op = new double[size];
-            for (int i = 0; i < op.Length; i++)
-                op[i] = 1.0;
-            double[] ev = game.BestResponse(turn, td, op);
-            double sum = 0;
-            for (int i = 0; i < ev.Length; i++)
-                sum += ev[i];
-            return sum / size;
-        }
-
+        
         public static double getExploitability(int size, TrainData td, Node game)
         {
-            double br0 = getBestResponseValue(size, 0, td, game);
-            double br1 = getBestResponseValue(size, 1, td, game);
-            return (br0 + br1) / 2;
+            return ((game.BestResponse(0, td, Enumerable.Repeat((double)1, size).ToArray()).AsParallel().Sum() / size) +
+                (game.BestResponse(1, td, Enumerable.Repeat((double)1, size).ToArray()).AsParallel().Sum() / size)) / 2;
         }
 
         public static Decision buildTreeHUL(Accelerator accelerator, int size, int turn, int betround, double pot, string hand_history)
