@@ -2,6 +2,7 @@
 using ILGPU;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ILGPU_CFRPlus_Subgame
 {
@@ -287,7 +288,7 @@ namespace ILGPU_CFRPlus_Subgame
 
                     double[] br = _children[a].BestResponse(player, td, newop);
 
-                    if (a == 0) ev = br; else add(ev, br);
+                    if (a == 0) ev = br; else ev = ev.Zip(br, (x, y) => x + y).ToArray(); // add(ev, br);
                 }
             }
 
@@ -300,11 +301,11 @@ namespace ILGPU_CFRPlus_Subgame
                 if (a[i] < b[i]) a[i] = b[i];
         }
 
-        private static void add(double[] a, double[] b)
-        {
-            for (int i = 0; i < a.Length; i++)
-                a[i] += b[i];
-        }
+        //private static void add(double[] a, double[] b)
+        //{
+        //    for (int i = 0; i < a.Length; i++)
+        //        a[i] += b[i];
+        //}
 
         //public void copyOrAdd(bool copy, double[] a, double [] b)
         //{
@@ -346,41 +347,43 @@ namespace ILGPU_CFRPlus_Subgame
         //    return s;
         //}
 
-        private double[] getNormalizedStrategy(int hand)
-        {
-            double sum = 0;
+        //private double[] getNormalizedStrategy(int hand)
+        //{
+        //    double sum = 0;
 
-            double[,] strat = _strategy.GetAsArray2D();
+        //    double[,] strat = _strategy.GetAsArray2D();
 
-            for (int a = 0; a < _children.Length; a++)
-                sum += strat[hand, a];
+        //    for (int a = 0; a < _children.Length; a++)
+        //        sum += strat[hand, a];
 
-            double[] s = new double[_children.Length];
+        //    double[] s = new double[_children.Length];
 
-            if (sum > 0)
-            {
-                for (int a = 0; a < _children.Length; a++)
-                    s[a] = strat[hand, a] / sum;
-            }
-            else
-            {
-                for (int a = 0; a < _children.Length; a++)
-                    s[a] = 1.0 / _children.Length;
-            }
+        //    if (sum > 0)
+        //    {
+        //        for (int a = 0; a < _children.Length; a++)
+        //            s[a] = strat[hand, a] / sum;
+        //    }
+        //    else
+        //    {
+        //        for (int a = 0; a < _children.Length; a++)
+        //            s[a] = 1.0 / _children.Length;
+        //    }
 
-            return s;
-        }
+        //    return s;
+        //}
 
         public double[,] getNormalizedStrategies()
         {
-            double sum;
 
             double[,] strat = _strategy.GetAsArray2D();
 
-            for (int hand = 0; hand < strat.GetLength(0); hand++)
+            Parallel.For(0, strat.GetLength(0), hand =>
             {
 
-                sum = 0.0;
+                //for (int hand = 0; hand < strat.GetLength(0); hand++)
+                //{
+
+                double sum = 0.0;
 
                 for (int a = 0; a < _children.Length; a++)
                     sum += strat[hand, a];
@@ -396,7 +399,7 @@ namespace ILGPU_CFRPlus_Subgame
                         strat[hand, a] = 1.0 / _children.Length;
                 }
 
-            }
+            });
 
             return strat;
         }
