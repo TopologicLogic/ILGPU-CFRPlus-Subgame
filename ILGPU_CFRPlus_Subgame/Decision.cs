@@ -283,8 +283,12 @@ namespace ILGPU_CFRPlus_Subgame
 
                 for (int a = 0; a < _children.Length; a++)
                 {
-                    for (int i = 0; i < op.Length; i++)
+                    Parallel.For(0, op.Length, i =>
+                    {
                         newop[i] = s[i, a] * op[i];
+                    });
+                    //for (int i = 0; i < op.Length; i++)
+                    //    newop[i] = s[i, a] * op[i];
 
                     double[] br = _children[a].BestResponse(player, td, newop);
 
@@ -297,8 +301,13 @@ namespace ILGPU_CFRPlus_Subgame
 
         private static void max(double[] a, double[] b)
         {
-            for (int i = 0; i < a.Length; i++)
+            Parallel.For(0, a.Length, i =>
+            {
                 if (a[i] < b[i]) a[i] = b[i];
+            });
+            
+            //for (int i = 0; i < a.Length; i++)
+            //    if (a[i] < b[i]) a[i] = b[i];
         }
 
         //private static void add(double[] a, double[] b)
