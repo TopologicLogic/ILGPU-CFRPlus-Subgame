@@ -292,7 +292,7 @@ namespace ILGPU_CFRPlus_Subgame
 
                     double[] br = _children[a].BestResponse(player, td, newop);
 
-                    if (a == 0) ev = br; else ev = ev.Zip(br, (x, y) => x + y).ToArray(); // add(ev, br);
+                    if (a == 0) ev = br; else add(ev, br);
                 }
             }
 
@@ -310,11 +310,16 @@ namespace ILGPU_CFRPlus_Subgame
             //    if (a[i] < b[i]) a[i] = b[i];
         }
 
-        //private static void add(double[] a, double[] b)
-        //{
-        //    for (int i = 0; i < a.Length; i++)
-        //        a[i] += b[i];
-        //}
+        private static void add(double[] a, double[] b)
+        {
+            Parallel.For(0, a.Length, i =>
+            {
+                a[i] += b[i];
+            });
+
+            //for (int i = 0; i < a.Length; i++)
+            //    a[i] += b[i];
+        }
 
         //public void copyOrAdd(bool copy, double[] a, double [] b)
         //{
