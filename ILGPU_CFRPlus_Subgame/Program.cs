@@ -3,7 +3,7 @@ using System;
 using ILGPU;
 using ILGPU.Runtime;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace ILGPU_CFRPlus_Subgame
 {
